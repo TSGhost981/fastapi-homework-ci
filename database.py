@@ -5,14 +5,14 @@ from sqlalchemy.orm import sessionmaker
 SQLALCHEMY_DATABASE_URL = "sqlite:///./cookbook.db"
 
 engine = create_engine(
-    # check_same_thread нужен только для SQLite
+    # check_same_thread РЅСѓР¶РµРЅ С‚РѕР»СЊРєРѕ РґР»СЏ SQLite
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-# Зависимость для получения сессии БД в эндпоинтах
+# Р—Р°РІРёСЃРёРјРѕСЃС‚СЊ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃРµСЃСЃРёРё Р‘Р” РІ СЌРЅРґРїРѕРёРЅС‚Р°С…
 def get_db():
     db = SessionLocal()
     try:

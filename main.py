@@ -6,12 +6,12 @@ import models
 import schemas
 from database import engine, get_db
 
-# Автоматически создаем таблицы в базе данных при запуске приложения
+# РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё СЃРѕР·РґР°РµРј С‚Р°Р±Р»РёС†С‹ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С… РїСЂРё Р·Р°РїСѓСЃРєРµ РїСЂРёР»РѕР¶РµРЅРёСЏ
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Cookbook API",
-    description="Максимально подробное API кулинарной книги для фронтенд-разработчиков.",
+    description="РњР°РєСЃРёРјР°Р»СЊРЅРѕ РїРѕРґСЂРѕР±РЅРѕРµ API РєСѓР»РёРЅР°СЂРЅРѕР№ РєРЅРёРіРё РґР»СЏ С„СЂРѕРЅС‚РµРЅРґ-СЂР°Р·СЂР°Р±РѕС‚С‡РёРєРѕРІ.",
     version="1.0.0"
 )
 
@@ -19,11 +19,11 @@ app = FastAPI(
 @app.get(
     "/recipes",
     response_model=List[schemas.RecipeShortResponse],
-    summary="Получить список всех рецептов",
-    description="Возвращает краткую информацию для первого экрана. Сортировка: сначала по популярности (views DESC), затем по времени приготовления (cooking_time ASC)."
+    summary="РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РІСЃРµС… СЂРµС†РµРїС‚РѕРІ",
+    description="Р’РѕР·РІСЂР°С‰Р°РµС‚ РєСЂР°С‚РєСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РґР»СЏ РїРµСЂРІРѕРіРѕ СЌРєСЂР°РЅР°. РЎРѕСЂС‚РёСЂРѕРІРєР°: СЃРЅР°С‡Р°Р»Р° РїРѕ РїРѕРїСѓР»СЏСЂРЅРѕСЃС‚Рё (views DESC), Р·Р°С‚РµРј РїРѕ РІСЂРµРјРµРЅРё РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ (cooking_time ASC)."
 )
 def get_recipes(db: Session = Depends(get_db)):
-    # Сортировка по убыванию просмотров (.desc()), затем по возрастанию времени приготовления
+    # РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СѓР±С‹РІР°РЅРёСЋ РїСЂРѕСЃРјРѕС‚СЂРѕРІ (.desc()), Р·Р°С‚РµРј РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РІСЂРµРјРµРЅРё РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ
     recipes = db.query(models.Recipe).order_by(
         models.Recipe.views.desc(),
         models.Recipe.cooking_time.asc()
@@ -34,8 +34,8 @@ def get_recipes(db: Session = Depends(get_db)):
 @app.get(
     "/recipes/{recipe_id}",
     response_model=schemas.RecipeDetailResponse,
-    summary="Получить детальную информацию о конкретном рецепте",
-    description="Возвращает полную информацию для второго экрана. При каждом успешном запросе счетчик просмотров увеличивается на 1."
+    summary="РџРѕР»СѓС‡РёС‚СЊ РґРµС‚Р°Р»СЊРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РєРѕРЅРєСЂРµС‚РЅРѕРј СЂРµС†РµРїС‚Рµ",
+    description="Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕР»РЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РґР»СЏ РІС‚РѕСЂРѕРіРѕ СЌРєСЂР°РЅР°. РџСЂРё РєР°Р¶РґРѕРј СѓСЃРїРµС€РЅРѕРј Р·Р°РїСЂРѕСЃРµ СЃС‡РµС‚С‡РёРє РїСЂРѕСЃРјРѕС‚СЂРѕРІ СѓРІРµР»РёС‡РёРІР°РµС‚СЃСЏ РЅР° 1."
 )
 def get_recipe_detail(recipe_id: int, db: Session = Depends(get_db)):
     recipe = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
@@ -43,10 +43,10 @@ def get_recipe_detail(recipe_id: int, db: Session = Depends(get_db)):
     if not recipe:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Рецепт с id {recipe_id} не найден"
+            detail=f"Р РµС†РµРїС‚ СЃ id {recipe_id} РЅРµ РЅР°Р№РґРµРЅ"
         )
 
-    # Увеличиваем количество просмотров согласно ТЗ
+    # РЈРІРµР»РёС‡РёРІР°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕСЃРјРѕС‚СЂРѕРІ СЃРѕРіР»Р°СЃРЅРѕ РўР—
     recipe.views += 1
     db.commit()
     db.refresh(recipe)
@@ -58,8 +58,8 @@ def get_recipe_detail(recipe_id: int, db: Session = Depends(get_db)):
     "/recipes",
     response_model=schemas.RecipeDetailResponse,
     status_code=status.HTTP_201_CREATED,
-    summary="Создать новый рецепт",
-    description="Добавляет новый рецепт в кулинарную книгу. По умолчанию количество просмотров устанавливается в 0."
+    summary="РЎРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ СЂРµС†РµРїС‚",
+    description="Р”РѕР±Р°РІР»СЏРµС‚ РЅРѕРІС‹Р№ СЂРµС†РµРїС‚ РІ РєСѓР»РёРЅР°СЂРЅСѓСЋ РєРЅРёРіСѓ. РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕСЃРјРѕС‚СЂРѕРІ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ РІ 0."
 )
 def create_recipe(recipe_data: schemas.RecipeCreate, db: Session = Depends(get_db)):
     new_recipe = models.Recipe(

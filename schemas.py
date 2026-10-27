@@ -1,31 +1,31 @@
 from pydantic import BaseModel, Field
 
-# Базовая схема со всеми общими полями
+# Р‘Р°Р·РѕРІР°СЏ СЃС…РµРјР° СЃРѕ РІСЃРµРјРё РѕР±С‰РёРјРё РїРѕР»СЏРјРё
 class RecipeBase(BaseModel):
-    title: str = Field(..., example="Борщ украинский", description="Название блюда")
-    cooking_time: int = Field(..., example=60, description="Время приготовления в минутах")
-    ingredients: str = Field(..., example="Свекла, капуста, картофель, говядина", description="Список ингредиентов")
-    description: str = Field(..., example="Классический рецепт наваристого борща...", description="Текстовое описание")
+    title: str = Field(..., example="Р‘РѕСЂС‰ СѓРєСЂР°РёРЅСЃРєРёР№", description="РќР°Р·РІР°РЅРёРµ Р±Р»СЋРґР°")
+    cooking_time: int = Field(..., example=60, description="Р’СЂРµРјСЏ РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ РІ РјРёРЅСѓС‚Р°С…")
+    ingredients: str = Field(..., example="РЎРІРµРєР»Р°, РєР°РїСѓСЃС‚Р°, РєР°СЂС‚РѕС„РµР»СЊ, РіРѕРІСЏРґРёРЅР°", description="РЎРїРёСЃРѕРє РёРЅРіСЂРµРґРёРµРЅС‚РѕРІ")
+    description: str = Field(..., example="РљР»Р°СЃСЃРёС‡РµСЃРєРёР№ СЂРµС†РµРїС‚ РЅР°РІР°СЂРёСЃС‚РѕРіРѕ Р±РѕСЂС‰Р°...", description="РўРµРєСЃС‚РѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ")
 
-# Схема для создания нового рецепта через POST
+# РЎС…РµРјР° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ СЂРµС†РµРїС‚Р° С‡РµСЂРµР· POST
 class RecipeCreate(RecipeBase):
     pass
 
-# Схема для ПЕРВОГО ЭКРАНА (Краткая информация в списке)
+# РЎС…РµРјР° РґР»СЏ РџР•Р Р’РћР“Рћ Р­РљР РђРќРђ (РљСЂР°С‚РєР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ РІ СЃРїРёСЃРєРµ)
 class RecipeShortResponse(BaseModel):
-    title: str = Field(..., description="Название блюда")
-    views: int = Field(..., description="Количество просмотров")
-    cooking_time: int = Field(..., description="Время приготовления в минутах")
+    title: str = Field(..., description="РќР°Р·РІР°РЅРёРµ Р±Р»СЋРґР°")
+    views: int = Field(..., description="РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕСЃРјРѕС‚СЂРѕРІ")
+    cooking_time: int = Field(..., description="Р’СЂРµРјСЏ РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ РІ РјРёРЅСѓС‚Р°С…")
 
     class Config:
         from_attributes = True
 
-# Схема для ВТОРОГО ЭКРАНА (Детальная информация о рецепте)
+# РЎС…РµРјР° РґР»СЏ Р’РўРћР РћР“Рћ Р­РљР РђРќРђ (Р”РµС‚Р°Р»СЊРЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЂРµС†РµРїС‚Рµ)
 class RecipeDetailResponse(BaseModel):
-    title: str = Field(..., description="Название блюда")
-    cooking_time: int = Field(..., description="Время приготовления в минутах")
-    ingredients: str = Field(..., description="Список ингредиентов")
-    description: str = Field(..., description="Текстовое описание")
+    title: str = Field(..., description="РќР°Р·РІР°РЅРёРµ Р±Р»СЋРґР°")
+    cooking_time: int = Field(..., description="Р’СЂРµРјСЏ РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ РІ РјРёРЅСѓС‚Р°С…")
+    ingredients: str = Field(..., description="РЎРїРёСЃРѕРє РёРЅРіСЂРµРґРёРµРЅС‚РѕРІ")
+    description: str = Field(..., description="РўРµРєСЃС‚РѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ")
 
     class Config:
         from_attributes = True

@@ -6,7 +6,7 @@ class Recipe(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True, nullable=False)
-    cooking_time = Column(Integer, nullable=False)  # Время в минутах
-    views = Column(Integer, default=0, nullable=False)  # Количество просмотров
-    ingredients = Column(Text, nullable=False)  # Список ингредиентов
-    description = Column(Text, nullable=False)  # Текстовое описание
+    cooking_time = Column(Integer, nullable=False)  # Р’СЂРµРјСЏ РІ РјРёРЅСѓС‚Р°С…
+    views = Column(Integer, default=0, nullable=False)  # РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕСЃРјРѕС‚СЂРѕРІ
+    ingredients = Column(Text, nullable=False)  # РЎРїРёСЃРѕРє РёРЅРіСЂРµРґРёРµРЅС‚РѕРІ
+    description = Column(Text, nullable=False)  # РўРµРєСЃС‚РѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ
