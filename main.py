@@ -1,6 +1,6 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+
+from fastapi import Depends, FastAPI, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List
 
 import models
 import schemas
@@ -18,7 +18,7 @@ app = FastAPI(
 
 @app.get(
     "/recipes",
-    response_model=List[schemas.RecipeShortResponse],
+    response_model=list[schemas.RecipeShortResponse],
     summary="Получить список всех рецептов",
     description="Возвращает краткую информацию для первого экрана. Сортировка: сначала по популярности (views DESC), затем по времени приготовления (cooking_time ASC)."
 )

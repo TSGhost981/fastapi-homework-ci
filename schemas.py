@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 
+
 # Базовая схема со всеми общими полями
 class RecipeBase(BaseModel):
     title: str = Field(..., example="Борщ украинский", description="Название блюда")
